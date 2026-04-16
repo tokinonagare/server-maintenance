@@ -1,0 +1,28 @@
+services:
+  woodpecker-server:
+    image: woodpeckerci/woodpecker-server:v3.5.0
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - ./woodpecker-data:/var/lib/woodpecker
+    environment:
+      - WOODPECKER_HOST=http://137.131.37.97:8000
+      - WOODPECKER_AGENT_SECRET=yoursecret123
+      - WOODPECKER_OPEN=true
+      # --- GitHub 认证 ---
+      - WOODPECKER_GITHUB=true
+      - WOODPECKER_GITHUB_CLIENT=Ov23liyIWV7sRrOMKmC9
+      - WOODPECKER_GITHUB_SECRET=bcff86b42fb50cd41a5db6c1806180a4a4e9200f
+      # ------------------
+    restart: always
+
+  woodpecker-agent:
+    image: woodpeckerci/woodpecker-agent:v3.5.0
+    command: agent
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - WOODPECKER_SERVER=woodpecker-server:9000
+      - WOODPECKER_AGENT_SECRET=yoursecret123
+    restart: always
