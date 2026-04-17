@@ -1,0 +1,21 @@
+[Unit]
+Description=LaiWan Web Test Control Service
+After=network.target
+
+[Service]
+Type=simple
+User=opc
+Group=opc
+WorkingDirectory=/home/opc/laiwan-web-test/control
+Environment=WEB_TEST_ROOT=/home/opc/laiwan-web-test
+Environment=WEB_TEST_SITE_HOST=laiwan-production-web-test.tokinonagare.com
+Environment=WEB_TEST_CONTROL_HOST=127.0.0.1
+Environment=WEB_TEST_CONTROL_PORT=8090
+Environment=WEB_TEST_DEFAULT_OPEN=false
+Environment=WEB_TEST_NGINX_CONTROL_DIR=/etc/nginx/laiwan-web-test
+ExecStart=/usr/bin/python3 /home/opc/laiwan-web-test/control/control-server.py
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target
