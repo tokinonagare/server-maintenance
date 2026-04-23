@@ -13,9 +13,7 @@
 ## 2. 目录结构
 
 - `docker/`: 包含所有 Docker 服务的启动配置。
-  - `woodpecker/`: Woodpecker CI Server & Agent。
-  - `jenkins/`: Jenkins Controller & Agents。
-  - `woodpecker-agent/`: 独立的 Woodpecker Agents。
+  - `woodpecker-agent/`: Woodpecker CI Agents。
   - `tester-bot/`: Telegram Tester Bot。
   - `laiwan-web-test/`: LaiWan Web 测试站点及控制后端。
   - `sing-box/`: sing-box VLESS 代理服务。
@@ -36,16 +34,9 @@
 ### 3.2 启动 Docker 服务
 对于每个服务目录，进入目录并运行 `docker-compose up -d`。
 
-#### Woodpecker CI
+#### Woodpecker Agent
 ```bash
-cd docker/woodpecker
-docker-compose up -d
-```
-
-#### Jenkins
-```bash
-cd docker/jenkins
-# 注意：如果是首次启动，可能需要先构建本地镜像或处理挂载卷数据
+cd docker/woodpecker-agent
 docker-compose up -d
 ```
 
@@ -84,8 +75,6 @@ docker-compose up -d
 
 ## 4. 关键信息备忘
 
-- **Woodpecker Host:** `http://137.131.37.97:8000`
-- **Jenkins Domain:** `https://jenkins.tokinonagare.com`
 - **LaiWan Web Test:** `https://laiwan-production-web-test.tokinonagare.com`
 - **sing-box VLESS:** `137.131.37.97:10909`
 - **数据备份:** 本仓库仅保存配置，不包含数据库和应用数据（如 `woodpecker-data`、Jenkins 的 `jobs`、Web 测试站点的 `www` 产物等）。请确保这些数据在服务器上有独立的持久化卷或备份机制。
