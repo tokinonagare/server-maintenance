@@ -1,0 +1,9 @@
+services:
+  sing-box:
+    image: ghcr.io/sagernet/sing-box:v1.11.8
+    ports:
+      - 10909:10909
+    volumes:
+      - ./config.json:/etc/sing-box/config.json:ro
+    restart: always
+    command: -c /etc/sing-box/config.json run

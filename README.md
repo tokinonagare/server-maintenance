@@ -18,6 +18,7 @@
   - `woodpecker-agent/`: 独立的 Woodpecker Agents。
   - `tester-bot/`: Telegram Tester Bot。
   - `laiwan-web-test/`: LaiWan Web 测试站点及控制后端。
+  - `sing-box/`: sing-box VLESS 代理服务。
 - `nginx/`: 系统级 Nginx 配置文件。
 
 ## 3. 快速恢复步骤
@@ -56,6 +57,13 @@ docker-compose up -d
    docker-compose up -d
    ```
 
+#### sing-box (VLESS 代理)
+```bash
+cd docker/sing-box
+docker-compose up -d
+```
+**注意:** 启动前需在 OCI 安全组中放行 TCP `10909` 端口。
+
 #### LaiWan Web Test
 1. **基础目录:** 创建 `/home/opc/laiwan-web-test` 目录，并将 `docker/laiwan-web-test/` 下的所有文件同步到该目录下。
 2. **Web 资源:** 将 Web 项目的构建产物放入 `/home/opc/laiwan-web-test/www` 目录。
@@ -79,4 +87,5 @@ docker-compose up -d
 - **Woodpecker Host:** `http://137.131.37.97:8000`
 - **Jenkins Domain:** `https://jenkins.tokinonagare.com`
 - **LaiWan Web Test:** `https://laiwan-production-web-test.tokinonagare.com`
+- **sing-box VLESS:** `137.131.37.97:10909`
 - **数据备份:** 本仓库仅保存配置，不包含数据库和应用数据（如 `woodpecker-data`、Jenkins 的 `jobs`、Web 测试站点的 `www` 产物等）。请确保这些数据在服务器上有独立的持久化卷或备份机制。
